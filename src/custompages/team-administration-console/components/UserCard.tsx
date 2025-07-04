@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Icon from '../../../components/AppIcon';
-import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
 import { User } from '../../../types';
 
@@ -48,7 +47,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onEdit, onViewProfile }) => {
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-4">
             <div className="relative">
-              <Image
+              <img
                 src={user.avatar}
                 alt={user.name}
                 className="w-12 h-12 rounded-full object-cover"

@@ -1,6 +1,5 @@
 import React from 'react';
 import Icon from '../../../components/AppIcon';
-import Image from '../../../components/AppImage';
 import * as LucideIcons from 'lucide-react';
 
 interface ActivityUser {
@@ -83,7 +82,7 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities = [] }) => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     {activity.user?.avatar && (
-                      <Image
+                      <img
                         src={activity.user.avatar}
                         alt={activity.user.name}
                         className="w-6 h-6 rounded-full"

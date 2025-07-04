@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Icon from '../../../components/AppIcon';
-import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
 import { Task } from '../../../types';
 
@@ -81,7 +80,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskClick, viewMode = 'card
         <div className="flex items-center justify-between mb-3">
           <div className="flex -space-x-2">
             {task.assignees.slice(0, 3).map((assignee, index) => (
-              <Image
+              <img
                 key={index}
                 src={assignee.avatar}
                 alt={assignee.name}
@@ -206,12 +205,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskClick, viewMode = 'card
           <div className="flex items-center space-x-4">
             <div className="flex -space-x-2">
               {task.assignees.map((assignee, index) => (
-                <Image
+                <img
                   key={index}
                   src={assignee.avatar}
                   alt={assignee.name}
                   className="w-8 h-8 rounded-full border-2 border-white hover:z-10 transition-transform hover:scale-110"
-                  // title={assignee.name}
+                  title={assignee.name}
                 />
               ))}
             </div>

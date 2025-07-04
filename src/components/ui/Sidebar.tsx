@@ -18,7 +18,11 @@ interface QuickAction {
   action: string;
 }
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  userRole?: 'admin' | 'support' | 'stakeholder' | 'executive' | 'dev';
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ userRole = 'admin' }) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [isMobileOpen, setIsMobileOpen] = useState<boolean>(false);
   const location = useLocation();

@@ -1,6 +1,5 @@
 import React from 'react';
 import Icon from '../../../components/AppIcon';
-import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
 
 export interface Integration {
@@ -58,7 +57,7 @@ const IntegrationCard: React.FC<IntegrationCardProps> = ({ integration, onConnec
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3">
           <div className="w-12 h-12 rounded-lg overflow-hidden bg-surface flex items-center justify-center">
-            <Image 
+            <img 
               src={integration.logo} 
               alt={`${integration.name} logo`}
               className="w-8 h-8 object-contain"

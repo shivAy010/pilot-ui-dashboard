@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
 
 interface OrganizationNode {
@@ -53,7 +52,7 @@ const OrganizationChart: React.FC<OrganizationChartProps> = ({ organizationData,
           {!hasChildren && <div className="w-8"></div>}
           
           <div className="relative">
-            <Image
+            <img
               src={node.avatar}
               alt={node.name}
               className="w-10 h-10 rounded-full object-cover"
