@@ -6,11 +6,16 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 8080
+    port: 8080,
+    host: true
   },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: 'dist',
+    sourcemap: true
+  }
 })
