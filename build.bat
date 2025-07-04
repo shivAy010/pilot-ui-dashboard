@@ -1,0 +1,3 @@
+@echo off
+echo Running Vite build in development mode...
+npx vite build --mode development
