@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Icon from '../AppIcon';
 import Button from './Button';
 import * as LucideIcons from 'lucide-react';
@@ -21,7 +21,7 @@ interface QuickAction {
 const Sidebar: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [isMobileOpen, setIsMobileOpen] = useState<boolean>(false);
-  const pathname = usePathname();
+  const location = useLocation();
 
   const navigationItems: NavigationItem[] = [
     { name: 'Unified Command Dashboard', path: '/unified-command-dashboard', icon: 'LayoutDashboard', description: 'Central operations overview' },
@@ -60,7 +60,7 @@ const Sidebar: React.FC = () => {
   };
 
   const isActivePath = (path: string): boolean => {
-    return pathname === path;
+    return location.pathname === path;
   };
 
   const handleQuickAction = (action: string) => {
@@ -123,7 +123,7 @@ const Sidebar: React.FC = () => {
               {navigationItems.map((item) => (
                 <Link
                   key={item.path}
-                  href={item.path}
+                  to={item.path}
                   onClick={() => setIsMobileOpen(false)}
                   className={`group flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActivePath(item.path)

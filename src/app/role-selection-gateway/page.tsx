@@ -1,13 +1,13 @@
 'use client'
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 
 import RoleCard from './RoleCard';
 import WelcomeHeader from './WelcomeHeader';
 import { Role, User } from '../../types';
 
 const RoleSelectionGateway = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [selectedRole, setSelectedRole] = useState<Role | null>(null);
   const [user] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
@@ -140,7 +140,7 @@ const RoleSelectionGateway = () => {
       localStorage.setItem('user', JSON.stringify(user));
       
       // Navigate to role-specific dashboard
-      router.push(role.route ?? '/');
+      navigate(role.route ?? '/');
     } catch (error) {
       console.error('Failed to configure role:', error);
       setSelectedRole(null);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Icon from '../AppIcon';
 import Button from './Button';
 import * as LucideIcons from 'lucide-react';
@@ -14,7 +14,7 @@ interface NavigationItem {
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const pathname = usePathname();
+  const location = useLocation();
 
   const navigationItems: NavigationItem[] = [
     { name: 'Unified Command Dashboard', path: '/unified-command-dashboard', icon: 'LayoutDashboard' },
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
   };
 
   const isActivePath = (path: string): boolean => {
-    return pathname === path;
+    return location.pathname === path;
   };
 
   const Logo: React.FC = () => (
@@ -89,7 +89,7 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 transition-transform duration-200 hover:scale-105">
+          <Link to="/" className="flex-shrink-0 transition-transform duration-200 hover:scale-105">
             <Logo />
           </Link>
 
@@ -170,7 +170,7 @@ const Header: React.FC = () => {
             {navigationItems.map((item) => (
               <Link
                 key={item.path}
-                href={item.path}
+                to={item.path}
                 onClick={closeMobileMenu}
                 className={`flex items-center space-x-3 px-3 py-3 rounded-md text-sm font-medium transition-all duration-200 ${
                   isActivePath(item.path)

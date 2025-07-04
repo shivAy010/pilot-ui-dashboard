@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import AuthForm from "@/custompages/auth/auth-form";
 import { useToast } from "@/hooks/use-toast";
 import { loginWithEmailPassword } from "@/services/auth";
 
 export default function LoginPage() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,7 +16,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await loginWithEmailPassword(email, password);
-      router.push("/");
+      navigate("/");
       toast({
         title: "Login successful",
         description: "Welcome to Sahej Life!",
