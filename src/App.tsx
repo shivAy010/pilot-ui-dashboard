@@ -8,6 +8,14 @@ import AgentExecutionLogs from './pages/AgentExecutionLogs';
 import CustomerSupport from './pages/CustomerSupport';
 import PlatformAnalytics from './pages/PlatformAnalytics';
 import ManualAgentTrigger from './pages/ManualAgentTrigger';
+import BusinessDeveloper from './pages/BusinessDeveloper';
+import MarketingExecutor from './pages/MarketingExecutor';
+import HRManager from './pages/HRManager';
+import SocialMediaExecutive from './pages/SocialMediaExecutive';
+import Developer from './pages/Developer';
+import QAEngineer from './pages/QAEngineer';
+import DevOps from './pages/DevOps';
+import Research from './pages/Research';
 import HomePage from './app/page';
 
 function App() {
@@ -25,6 +33,14 @@ function App() {
         <Route path="/ops/support/dashboard" element={<CustomerSupport />} />
         <Route path="/ops/dashboard/analytics" element={<PlatformAnalytics />} />
         <Route path="/ops/agents/trigger" element={<ManualAgentTrigger />} />
+        <Route path="/ops/business/developer" element={<BusinessDeveloper />} />
+        <Route path="/ops/marketing/executor" element={<MarketingExecutor />} />
+        <Route path="/ops/hr/manager" element={<HRManager />} />
+        <Route path="/ops/social/executive" element={<SocialMediaExecutive />} />
+        <Route path="/ops/dev/tasks" element={<Developer />} />
+        <Route path="/ops/qa/tasks" element={<QAEngineer />} />
+        <Route path="/ops/devops/tasks" element={<DevOps />} />
+        <Route path="/ops/research/tasks" element={<Research />} />
       </Routes>
     </AdminLayout>
   );
