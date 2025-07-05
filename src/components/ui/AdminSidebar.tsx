@@ -12,7 +12,7 @@ interface NavigationItem {
 }
 
 interface AdminSidebarProps {
-  userRole: 'admin' | 'support' | 'stakeholder' | 'executive' | 'dev';
+  userRole: 'admin' | 'support' | 'stakeholder' | 'executive' | 'dev' | 'verification_officer' | 'support_manager' | 'business_developer' | 'marketing_executor' | 'hr_manager' | 'social_media_executive' | 'developer' | 'qa' | 'devops' | 'research';
 }
 
 const AdminSidebar: React.FC<AdminSidebarProps> = ({ userRole }) => {
@@ -32,35 +32,84 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ userRole }) => {
       path: '/ops/providers/onboarding',
       icon: 'UserCheck',
       description: 'Review provider applications',
-      roles: ['admin']
-    },
-    {
-      name: 'Decision Hub',
-      path: '/ops/tasks/decision-hub',
-      icon: 'GitBranch',
-      description: 'Agent-generated proposals',
-      roles: ['stakeholder', 'admin']
-    },
-    {
-      name: 'My Tasks',
-      path: '/ops/tasks/my-tasks',
-      icon: 'CheckSquare',
-      description: 'Assigned task queue',
-      roles: ['executive', 'admin']
+      roles: ['admin', 'verification_officer']
     },
     {
       name: 'Customer Support',
       path: '/ops/support/dashboard',
       icon: 'MessageCircle',
       description: 'Support ticket management',
-      roles: ['support', 'admin']
+      roles: ['support', 'admin', 'support_manager']
+    },
+    {
+      name: 'Business Development',
+      path: '/ops/business/developer',
+      icon: 'Briefcase',
+      description: 'Doctor onboarding CRM',
+      roles: ['business_developer', 'admin']
+    },
+    {
+      name: 'Marketing Campaigns',
+      path: '/ops/marketing/executor',
+      icon: 'Target',
+      description: 'Ad campaign management',
+      roles: ['marketing_executor', 'admin']
+    },
+    {
+      name: 'HR Management',
+      path: '/ops/hr/manager',
+      icon: 'Users',
+      description: 'Job postings and hiring',
+      roles: ['hr_manager', 'admin']
+    },
+    {
+      name: 'Social Media',
+      path: '/ops/social/executive',
+      icon: 'Share2',
+      description: 'Social content management',
+      roles: ['social_media_executive', 'admin']
+    },
+    {
+      name: 'Development Tasks',
+      path: '/ops/dev/tasks',
+      icon: 'Code',
+      description: 'Developer task queue',
+      roles: ['developer', 'admin']
+    },
+    {
+      name: 'QA Testing',
+      path: '/ops/qa/tasks',
+      icon: 'TestTube',
+      description: 'Quality assurance tasks',
+      roles: ['qa', 'admin']
+    },
+    {
+      name: 'DevOps Operations',
+      path: '/ops/devops/tasks',
+      icon: 'Server',
+      description: 'Infrastructure management',
+      roles: ['devops', 'admin']
+    },
+    {
+      name: 'Decision Hub',
+      path: '/ops/tasks/decision-hub',
+      icon: 'GitBranch',
+      description: 'Strategic decisions',
+      roles: ['stakeholder', 'admin']
+    },
+    {
+      name: 'Research Center',
+      path: '/ops/research/tasks',
+      icon: 'Search',
+      description: 'Research assignments',
+      roles: ['research', 'admin']
     },
     {
       name: 'Agent Execution Logs',
       path: '/ops/agents/execution-logs',
       icon: 'Activity',
       description: 'Agent workflow debugging',
-      roles: ['admin', 'dev']
+      roles: ['admin', 'developer']
     },
     {
       name: 'Manual Agent Trigger',

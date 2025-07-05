@@ -5,7 +5,7 @@ import AdminSidebar from '../ui/AdminSidebar';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
-  userRole?: 'admin' | 'support' | 'stakeholder' | 'executive' | 'dev';
+  userRole?: 'admin' | 'support' | 'stakeholder' | 'executive' | 'dev' | 'verification_officer' | 'support_manager' | 'business_developer' | 'marketing_executor' | 'hr_manager' | 'social_media_executive' | 'developer' | 'qa' | 'devops' | 'research';
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children, userRole = 'admin' }) => {
