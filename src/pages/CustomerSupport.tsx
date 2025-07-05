@@ -20,8 +20,10 @@ interface SupportTicket {
 const CustomerSupport: React.FC = () => {
   const [tickets, setTickets] = useState<SupportTicket[]>([]);
   const [selectedTicket, setSelectedTicket] = useState<SupportTicket | null>(null);
+  const [workingTicket, setWorkingTicket] = useState<SupportTicket | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'open' | 'in_progress' | 'resolved'>('all');
+  const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
     // Mock data - replace with API call
@@ -118,6 +120,39 @@ const CustomerSupport: React.FC = () => {
       )
     );
     setSelectedTicket(null);
+  };
+
+  const handleStartWorking = (ticket: SupportTicket) => {
+    // Update ticket status to in_progress
+    setTickets(prev => 
+      prev.map(t => 
+        t.id === ticket.id 
+          ? { ...t, status: 'in_progress', updatedAt: new Date().toISOString(), assignedTo: 'Current Agent' }
+          : t
+      )
+    );
+    setSelectedTicket(null);
+    setWorkingTicket(ticket);
+  };
+
+  const mockChatHistory = [
+    {
+      sender: 'customer',
+      message: 'I am unable to book an appointment with Dr. Johnson. The system shows an error when I try to select a time slot.',
+      timestamp: '2024-07-02T09:30:00Z'
+    },
+    {
+      sender: 'customer',
+      message: 'This is very urgent as I need to see the doctor soon.',
+      timestamp: '2024-07-02T09:35:00Z'
+    }
+  ];
+
+  const handleSendMessage = () => {
+    if (!newMessage.trim()) return;
+    // Here you would send the message to the customer
+    console.log('Sending message:', newMessage);
+    setNewMessage('');
   };
 
   if (isLoading) {
@@ -318,21 +353,106 @@ const CustomerSupport: React.FC = () => {
                     <Button
                       variant="outline"
                       iconName="Play"
-                      onClick={() => handleStatusUpdate(selectedTicket.id, 'in_progress')}
+                      onClick={() => handleStartWorking(selectedTicket)}
                       className="text-primary hover:text-primary border-primary-200 hover:bg-primary-50"
                     >
                       Start Working
                     </Button>
                   )}
-                  {selectedTicket.status === 'in_progress' && (
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Chat Interface for Working Ticket */}
+      {workingTicket && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-6xl w-full h-[80vh] flex flex-col">
+            {/* Header */}
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <Icon name="MessageSquare" size={20} className="text-primary" />
+                <div>
+                  <h2 className="text-xl font-semibold text-text-primary">{workingTicket.subject}</h2>
+                  <p className="text-sm text-text-muted">#{workingTicket.ticketNumber} - {workingTicket.userName}</p>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                iconName="X"
+                onClick={() => setWorkingTicket(null)}
+                className="text-text-muted hover:text-text-primary"
+              />
+            </div>
+
+            {/* Chat Content */}
+            <div className="flex-1 flex overflow-hidden">
+              {/* Left Column - Chat History */}
+              <div className="w-1/2 border-r border-border flex flex-col">
+                <div className="p-4 border-b border-border">
+                  <h3 className="font-medium text-text-primary flex items-center">
+                    <Icon name="History" size={16} className="mr-2" />
+                    Chat History
+                  </h3>
+                </div>
+                <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                  {mockChatHistory.map((chat, index) => (
+                    <div key={index} className={`flex ${chat.sender === 'customer' ? 'justify-start' : 'justify-end'}`}>
+                      <div className={`max-w-[70%] p-3 rounded-lg ${
+                        chat.sender === 'customer' 
+                          ? 'bg-surface text-text-primary' 
+                          : 'bg-primary text-primary-foreground'
+                      }`}>
+                        <p className="text-sm">{chat.message}</p>
+                        <p className={`text-xs mt-1 ${
+                          chat.sender === 'customer' 
+                            ? 'text-text-muted' 
+                            : 'text-primary-foreground opacity-80'
+                        }`}>
+                          {new Date(chat.timestamp).toLocaleTimeString()}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column - Message Composer */}
+              <div className="w-1/2 flex flex-col">
+                <div className="p-4 border-b border-border">
+                  <h3 className="font-medium text-text-primary flex items-center">
+                    <Icon name="Mail" size={16} className="mr-2" />
+                    Send Message to Customer
+                  </h3>
+                </div>
+                <div className="flex-1 p-4 flex flex-col">
+                  <div className="flex-1 mb-4">
+                    <label className="block text-sm font-medium text-text-primary mb-2">
+                      Message
+                    </label>
+                    <textarea
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      placeholder="Type your message to the customer..."
+                      className="w-full h-32 p-3 border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs text-text-muted">
+                      This message will be sent to {workingTicket.userEmail}
+                    </p>
                     <Button
-                      variant="primary"
-                      iconName="CheckCircle"
-                      onClick={() => handleStatusUpdate(selectedTicket.id, 'resolved')}
+                      onClick={handleSendMessage}
+                      disabled={!newMessage.trim()}
+                      iconName="Send"
+                      className="ml-4"
                     >
-                      Mark Resolved
+                      Send Message
                     </Button>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
