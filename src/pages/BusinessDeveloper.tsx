@@ -129,21 +129,21 @@ const BusinessDeveloper: React.FC = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-white border-b border-border shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <div className="flex items-center space-x-3">
-              <Icon name="Briefcase" size={24} className="text-primary" />
+              <Icon name="Briefcase" size={20} className="text-primary sm:w-6 sm:h-6" />
               <div>
-                <h1 className="text-2xl font-bold text-text-primary">Business Development CRM</h1>
-                <p className="text-text-secondary">Manage doctor onboarding pipeline</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-text-primary">Business Development CRM</h1>
+                <p className="text-sm sm:text-base text-text-secondary">Manage doctor onboarding pipeline</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="bg-warning-50 border border-warning-200 rounded-lg px-4 py-2">
-                <span className="text-warning font-medium">{doctors.filter(d => ['form_filled', 'documents_submitted', 'call_scheduled'].includes(d.stage)).length} Pending Calls</span>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+              <div className="bg-warning-50 border border-warning-200 rounded-lg px-3 sm:px-4 py-2 w-full sm:w-auto">
+                <span className="text-warning font-medium text-sm">{doctors.filter(d => ['form_filled', 'documents_submitted', 'call_scheduled'].includes(d.stage)).length} Pending Calls</span>
               </div>
-              <div className="bg-success-50 border border-success-200 rounded-lg px-4 py-2">
-                <span className="text-success font-medium">{doctors.filter(d => d.stage === 'onboarded').length} Onboarded</span>
+              <div className="bg-success-50 border border-success-200 rounded-lg px-3 sm:px-4 py-2 w-full sm:w-auto">
+                <span className="text-success font-medium text-sm">{doctors.filter(d => d.stage === 'onboarded').length} Onboarded</span>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@ const BusinessDeveloper: React.FC = () => {
       {/* Filter Tabs */}
       <div className="bg-white border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex space-x-8">
+          <div className="flex space-x-4 sm:space-x-8 overflow-x-auto">
             {[
               { key: 'all', label: 'All Doctors', count: doctors.length },
               { key: 'pending_call', label: 'Pending Calls', count: doctors.filter(d => ['form_filled', 'documents_submitted', 'call_scheduled'].includes(d.stage)).length },
@@ -163,7 +163,7 @@ const BusinessDeveloper: React.FC = () => {
               <button
                 key={tab.key}
                 onClick={() => setFilter(tab.key as any)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`py-4 px-1 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap ${
                   filter === tab.key
                     ? 'border-primary text-primary'
                     : 'border-transparent text-text-muted hover:text-text-secondary hover:border-border'
@@ -177,57 +177,57 @@ const BusinessDeveloper: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         <div className="bg-white rounded-lg shadow-sm border border-border">
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {filteredDoctors.length === 0 ? (
-              <div className="text-center py-12">
-                <Icon name="UserCheck" size={48} className="text-text-muted mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-text-primary mb-2">No doctors found</h3>
-                <p className="text-text-secondary">No doctors match the current filter.</p>
+              <div className="text-center py-8 sm:py-12">
+                <Icon name="UserCheck" size={40} className="text-text-muted mx-auto mb-4 sm:w-12 sm:h-12" />
+                <h3 className="text-base sm:text-lg font-medium text-text-primary mb-2">No doctors found</h3>
+                <p className="text-sm sm:text-base text-text-secondary">No doctors match the current filter.</p>
               </div>
             ) : (
               <div className="space-y-4">
                 {filteredDoctors.map((doctor) => (
                   <div
                     key={doctor.id}
-                    className="border border-border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
+                    className="border border-border rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow cursor-pointer active:bg-gray-50"
                     onClick={() => setSelectedDoctor(doctor)}
                   >
                     <div className="flex items-start justify-between">
-                      <div className="flex items-start space-x-4 flex-1">
-                        <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
-                          <Icon name="UserCheck" size={20} className="text-primary" />
+                      <div className="flex items-start space-x-3 sm:space-x-4 flex-1 min-w-0">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <Icon name="UserCheck" size={16} className="text-primary sm:w-5 sm:h-5" />
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-3 mb-2">
-                            <h3 className="font-semibold text-text-primary">{doctor.name}</h3>
-                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getStageColor(doctor.stage)}`}>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mb-2">
+                            <h3 className="font-semibold text-text-primary truncate">{doctor.name}</h3>
+                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border w-fit ${getStageColor(doctor.stage)}`}>
                               {getStageLabel(doctor.stage)}
                             </span>
                           </div>
-                          <p className="text-text-secondary mb-3">{doctor.specialization} • {doctor.experience} years experience</p>
-                          <div className="flex items-center space-x-6 text-sm text-text-muted">
+                          <p className="text-text-secondary mb-3 text-sm sm:text-base">{doctor.specialization} • {doctor.experience} years experience</p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 text-xs sm:text-sm text-text-muted">
                             <div className="flex items-center space-x-1">
-                              <Icon name="Mail" size={14} />
-                              <span>{doctor.email}</span>
+                              <Icon name="Mail" size={12} className="sm:w-3.5 sm:h-3.5 flex-shrink-0" />
+                              <span className="truncate">{doctor.email}</span>
                             </div>
                             <div className="flex items-center space-x-1">
-                              <Icon name="Phone" size={14} />
-                              <span>{doctor.phone}</span>
+                              <Icon name="Phone" size={12} className="sm:w-3.5 sm:h-3.5 flex-shrink-0" />
+                              <span className="truncate">{doctor.phone}</span>
                             </div>
                             <div className="flex items-center space-x-1">
-                              <Icon name="MapPin" size={14} />
+                              <Icon name="MapPin" size={12} className="sm:w-3.5 sm:h-3.5 flex-shrink-0" />
                               <span>{doctor.location}</span>
                             </div>
                             <div className="flex items-center space-x-1">
-                              <Icon name="Calendar" size={14} />
+                              <Icon name="Calendar" size={12} className="sm:w-3.5 sm:h-3.5 flex-shrink-0" />
                               <span>{new Date(doctor.registrationDate).toLocaleDateString()}</span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <Icon name="ChevronRight" size={20} className="text-text-muted" />
+                      <Icon name="ChevronRight" size={16} className="text-text-muted flex-shrink-0 sm:w-5 sm:h-5" />
                     </div>
                   </div>
                 ))}

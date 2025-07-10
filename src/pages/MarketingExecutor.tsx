@@ -161,21 +161,21 @@ const MarketingExecutor: React.FC = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-white border-b border-border shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <div className="flex items-center space-x-3">
-              <Icon name="Target" size={24} className="text-primary" />
+              <Icon name="Target" size={20} className="text-primary sm:w-6 sm:h-6" />
               <div>
-                <h1 className="text-2xl font-bold text-text-primary">Marketing Campaign Center</h1>
-                <p className="text-text-secondary">Copy-paste ready campaign instructions</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-text-primary">Marketing Campaign Center</h1>
+                <p className="text-sm sm:text-base text-text-secondary">Copy-paste ready campaign instructions</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="bg-error-50 border border-error-200 rounded-lg px-4 py-2">
-                <span className="text-error font-medium">{campaigns.filter(c => c.status === 'feedback_required').length} Need Feedback</span>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+              <div className="bg-error-50 border border-error-200 rounded-lg px-3 sm:px-4 py-2 w-full sm:w-auto">
+                <span className="text-error font-medium text-sm">{campaigns.filter(c => c.status === 'feedback_required').length} Need Feedback</span>
               </div>
-              <div className="bg-warning-50 border border-warning-200 rounded-lg px-4 py-2">
-                <span className="text-warning font-medium">{campaigns.filter(c => c.status === 'pending').length} Pending</span>
+              <div className="bg-warning-50 border border-warning-200 rounded-lg px-3 sm:px-4 py-2 w-full sm:w-auto">
+                <span className="text-warning font-medium text-sm">{campaigns.filter(c => c.status === 'pending').length} Pending</span>
               </div>
             </div>
           </div>
@@ -183,47 +183,49 @@ const MarketingExecutor: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         <div className="bg-white rounded-lg shadow-sm border border-border">
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <div className="space-y-4">
               {campaigns.map((campaign) => (
                 <div
                   key={campaign.id}
-                  className="border border-border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
+                  className="border border-border rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow cursor-pointer active:bg-gray-50"
                   onClick={() => setSelectedCampaign(campaign)}
                 >
                   <div className="flex items-start justify-between">
-                    <div className="flex items-start space-x-4 flex-1">
-                      <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
-                        <Icon name={getPlatformIcon(campaign.platform)} size={20} className="text-primary" />
+                    <div className="flex items-start space-x-3 sm:space-x-4 flex-1 min-w-0">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Icon name={getPlatformIcon(campaign.platform)} size={16} className="text-primary sm:w-5 sm:h-5" />
                       </div>
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-3 mb-2">
-                          <h3 className="font-semibold text-text-primary">{campaign.title}</h3>
-                          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getPriorityColor(campaign.priority)}`}>
-                            {campaign.priority.toUpperCase()}
-                          </span>
-                          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getStatusColor(campaign.status)}`}>
-                            {campaign.status.replace('_', ' ').toUpperCase()}
-                          </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col space-y-2 mb-2">
+                          <h3 className="font-semibold text-text-primary text-sm sm:text-base break-words">{campaign.title}</h3>
+                          <div className="flex flex-wrap gap-2">
+                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getPriorityColor(campaign.priority)}`}>
+                              {campaign.priority.toUpperCase()}
+                            </span>
+                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getStatusColor(campaign.status)}`}>
+                              {campaign.status.replace('_', ' ').toUpperCase()}
+                            </span>
+                          </div>
                         </div>
-                        <p className="text-text-secondary mb-3">
+                        <p className="text-text-secondary mb-3 text-sm">
                           {campaign.type.charAt(0).toUpperCase() + campaign.type.slice(1)} campaign on {campaign.platform.charAt(0).toUpperCase() + campaign.platform.slice(1)}
                         </p>
-                        <div className="flex items-center space-x-6 text-sm text-text-muted">
+                        <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm text-text-muted">
                           <div className="flex items-center space-x-1">
-                            <Icon name="Calendar" size={14} />
+                            <Icon name="Calendar" size={12} className="sm:w-3.5 sm:h-3.5" />
                             <span>{new Date(campaign.createdAt).toLocaleDateString()}</span>
                           </div>
                           <div className="flex items-center space-x-1">
-                            <Icon name="Target" size={14} />
-                            <span>{campaign.instructions.budget}</span>
+                            <Icon name="Target" size={12} className="sm:w-3.5 sm:h-3.5" />
+                            <span className="truncate">{campaign.instructions.budget}</span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <Icon name="ChevronRight" size={20} className="text-text-muted" />
+                    <Icon name="ChevronRight" size={16} className="text-text-muted flex-shrink-0 sm:w-5 sm:h-5" />
                   </div>
                 </div>
               ))}
@@ -234,15 +236,15 @@ const MarketingExecutor: React.FC = () => {
 
       {/* Campaign Detail Modal */}
       {selectedCampaign && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-border">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2 sm:p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+            <div className="p-4 sm:p-6 border-b border-border">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <Icon name={getPlatformIcon(selectedCampaign.platform)} size={24} className="text-primary" />
-                  <div>
-                    <h2 className="text-xl font-semibold text-text-primary">{selectedCampaign.title}</h2>
-                    <p className="text-sm text-text-muted">
+                <div className="flex items-center space-x-3 min-w-0 flex-1 pr-4">
+                  <Icon name={getPlatformIcon(selectedCampaign.platform)} size={20} className="text-primary flex-shrink-0 sm:w-6 sm:h-6" />
+                  <div className="min-w-0 flex-1">
+                    <h2 className="text-lg sm:text-xl font-semibold text-text-primary break-words">{selectedCampaign.title}</h2>
+                    <p className="text-xs sm:text-sm text-text-muted">
                       {selectedCampaign.type.charAt(0).toUpperCase() + selectedCampaign.type.slice(1)} • {selectedCampaign.platform.charAt(0).toUpperCase() + selectedCampaign.platform.slice(1)}
                     </p>
                   </div>
@@ -252,13 +254,13 @@ const MarketingExecutor: React.FC = () => {
                   size="sm"
                   iconName="X"
                   onClick={() => setSelectedCampaign(null)}
-                  className="text-text-muted hover:text-text-primary"
+                  className="text-text-muted hover:text-text-primary flex-shrink-0"
                 />
               </div>
             </div>
             
-            <div className="p-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="p-4 sm:p-6">
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8">
                 {/* Campaign Instructions */}
                 <div className="space-y-6">
                   <h3 className="text-lg font-semibold text-text-primary">Copy-Paste Instructions</h3>

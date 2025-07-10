@@ -237,21 +237,21 @@ const SocialMediaExecutive: React.FC = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-white border-b border-border shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <div className="flex items-center space-x-3">
-              <Icon name="Share" size={24} className="text-primary" />
+              <Icon name="Share" size={20} className="text-primary sm:w-6 sm:h-6" />
               <div>
-                <h1 className="text-2xl font-bold text-text-primary">Social Media Command Center</h1>
-                <p className="text-text-secondary">Manage content across all platforms</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-text-primary">Social Media Command Center</h1>
+                <p className="text-sm sm:text-base text-text-secondary">Manage content across all platforms</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="bg-error-50 border border-error-200 rounded-lg px-4 py-2">
-                <span className="text-error font-medium">{tasks.filter(t => t.priority === 'high' && t.status === 'pending').length} High Priority</span>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+              <div className="bg-error-50 border border-error-200 rounded-lg px-3 sm:px-4 py-2 w-full sm:w-auto">
+                <span className="text-error font-medium text-sm">{tasks.filter(t => t.priority === 'high' && t.status === 'pending').length} High Priority</span>
               </div>
-              <div className="bg-warning-50 border border-warning-200 rounded-lg px-4 py-2">
-                <span className="text-warning font-medium">{tasks.filter(t => t.status === 'pending').length} Pending</span>
+              <div className="bg-warning-50 border border-warning-200 rounded-lg px-3 sm:px-4 py-2 w-full sm:w-auto">
+                <span className="text-warning font-medium text-sm">{tasks.filter(t => t.status === 'pending').length} Pending</span>
               </div>
             </div>
           </div>
